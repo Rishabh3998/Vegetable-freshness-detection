@@ -37,13 +37,14 @@ dependencies:
   firebase_core: ^1.10.0
   flutter_bluetooth_serial: ^0.4.0
   scoped_model: ^1.1.0
-  camera: ^0.9.4+4
+  # camera: ^0.9.4+4
   path_provider: ^2.0.7
   path: ^1.8.0
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.4
+  google_fonts: ^2.1.0
 
 dev_dependencies:
   flutter_test:
@@ -74,7 +75,7 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-    - assets/front.jpg
+    - assets/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
