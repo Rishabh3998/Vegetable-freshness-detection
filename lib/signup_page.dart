@@ -350,7 +350,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     email: _email!, password: _pwd!))
             .user!;
         user.sendEmailVerification();
-        Navigator.pushReplacementNamed(context, '/screen2');
+        Navigator.pushReplacementNamed(context, '/screen3');
       } catch (e) {
         print(e);
       }

@@ -12,10 +12,10 @@ import 'package:vegetable_app/signup_page.dart';
 import 'package:vegetable_app/welcome.dart';
 
 void main() {
-  // WidgetsFlutterBinding.ensureInitialized();
+  WidgetsFlutterBinding.ensureInitialized();
   // future:
-  // Firebase.initializeApp();
-  //final cameras = await availableCameras();
+  Firebase.initializeApp();
+  // final cameras = await availableCameras();
   //final firstCamera = cameras.first;
   runApp(
     MyApp(
@@ -43,7 +43,7 @@ class MyApp extends StatelessWidget {
         // '/screen8': (BuildContext context) => Rancidity()
       },
       title: "Detector",
-      home: Welcomescreen(),
+      home: const Welcomescreen(),
     );
   }
 }
