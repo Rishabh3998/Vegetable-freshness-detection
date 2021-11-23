@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:vegetable_app/home_page.dart';
 import 'package:vegetable_app/mainlogin_page.dart';
 import 'package:vegetable_app/signup_page.dart';
 
@@ -30,7 +31,7 @@ class _LoginPageState extends State<LoginPage> {
               ),
               Container(
                 width: (MediaQuery.of(context).size.width),
-                height: 500,
+                height: 400,
                 decoration: const BoxDecoration(
                   image: DecorationImage(
                     image: AssetImage('assets/introPage.jpg'),
@@ -63,7 +64,7 @@ class _LoginPageState extends State<LoginPage> {
                             "LOG IN",
                             style: GoogleFonts.raleway(
                               fontStyle: FontStyle.normal,
-                              color: Colors.black,
+                              color: Colors.white,
                               fontWeight: FontWeight.bold,
                               fontSize: 20.0,
                             ),
@@ -118,6 +119,41 @@ class _LoginPageState extends State<LoginPage> {
                               context,
                               MaterialPageRoute(
                                 builder: (context) => SignUpPage(),
+                              ),
+                            );
+                            setState(() {});
+                          },
+                        ),
+                        const SizedBox(
+                          height: 20.0,
+                        ),
+                        ElevatedButton(
+                          child: Text(
+                            "DETECT",
+                            style: GoogleFonts.raleway(
+                              fontStyle: FontStyle.normal,
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 20.0,
+                            ),
+                          ),
+                          style: ElevatedButton.styleFrom(
+                            primary: Colors.green,
+                            minimumSize: const Size(double.infinity, 50.0),
+                            side: const BorderSide(
+                                width: 1.0, color: Colors.white),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10.0),
+                            ),
+                            textStyle: const TextStyle(
+                              color: Colors.black,
+                            ),
+                          ),
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => HomePage(),
                               ),
                             );
                             setState(() {});

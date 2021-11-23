@@ -4,19 +4,13 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:vegetable_app/about.dart';
+import 'package:vegetable_app/home_page.dart';
 import 'package:vegetable_app/login_page.dart';
 import 'package:vegetable_app/mainlogin_page.dart';
+import 'package:vegetable_app/services.dart';
 import 'package:vegetable_app/signup.dart';
 import 'package:vegetable_app/signup_page.dart';
 import 'package:vegetable_app/welcome.dart';
-
-// import 'package:foodaayush/firstsreen.dart';
-// import 'package:foodaayush/mainnutriscreen.dart';
-// import 'package:foodaayush/rancidity_check.dart';
-// import 'package:foodaayush/signup.dart';
-
-// import 'package:foodaayush/classify.dart';
-// import 'login.dart';
 
 void main() {
   // WidgetsFlutterBinding.ensureInitialized();
@@ -41,17 +35,16 @@ class MyApp extends StatelessWidget {
         // ignore: non_constant_identifier_names
         '/screen1': (BuildContext context) => Welcomescreen(),
         '/screen2': (BuildContext context) => LoginPage(),
-        // '/screen3': (BuildContext context) => HomeClass(user),
+        '/screen3': (BuildContext context) => HomePage(),
         '/screen4': (BuildContext context) => SignUpPage(),
-        // '/screen5': (BuildContext context) => MainNutriScreen(),
         '/screen6': (BuildContext context) => AboutUs(),
         // // "/screen5": (BuildContext context) =>
         // //     new Freshcam(camera: cameras.first)
-        // '/screen7': (BuildContext context) => Classifier(),
+        // '/screen7': (BuildContext context) => HomePage(),
         // '/screen8': (BuildContext context) => Rancidity()
       },
       title: "Detector",
-      home: AboutUs(),
+      home: Welcomescreen(),
     );
   }
 }

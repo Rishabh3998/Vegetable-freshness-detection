@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:vegetable_app/home_page.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:vegetable_app/home.dart';
+// import 'package:vegetable_app/home_page.dart';
 import 'package:vegetable_app/signup_page.dart';
 
 class MainLoginPage extends StatefulWidget {
@@ -9,6 +11,8 @@ class MainLoginPage extends StatefulWidget {
 }
 
 class _MainLoginPageState extends State<MainLoginPage> {
+  String? _email, _pwd;
+  final GlobalKey<FormState> _formkey = GlobalKey<FormState>();
   bool _obscureText = true;
 
   // String _password;
@@ -20,33 +24,31 @@ class _MainLoginPageState extends State<MainLoginPage> {
     });
   }
 
-  moveToHome(BuildContext context) async {
-    if (_formKey.currentState!.validate()) {
-      setState(
-        () {
-          changeButton = true;
-        },
-      );
-      await Future.delayed(
-        const Duration(
-          milliseconds: 300,
-        ),
-      );
-      await Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => HomePage(),
-        ),
-      );
-      setState(
-        () {
-          changeButton = false;
-        },
-      );
-    }
-  }
-
-  final _formKey = GlobalKey<FormState>();
+  // moveToHome(BuildContext context) async {
+  //   if (_formKey.currentState!.validate()) {
+  //     setState(
+  //       () {
+  //         changeButton = true;
+  //       },
+  //     );
+  //     await Future.delayed(
+  //       const Duration(
+  //         milliseconds: 300,
+  //       ),
+  //     );
+  //     // await Navigator.push(
+  //     //   context,
+  //     //   MaterialPageRoute(
+  //     //     builder: (context) => HomePage(),
+  //     //   ),
+  //     // );
+  //     setState(
+  //       () {
+  //         changeButton = false;
+  //       },
+  //     );
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -85,7 +87,7 @@ class _MainLoginPageState extends State<MainLoginPage> {
                         height: 200.0,
                       ),
                       Form(
-                        key: _formKey,
+                        key: _formkey,
                         child: Padding(
                           padding: const EdgeInsets.fromLTRB(30, 0, 30, 0),
                           child: Column(
@@ -93,10 +95,11 @@ class _MainLoginPageState extends State<MainLoginPage> {
                               TextFormField(
                                 validator: (value) {
                                   if (value!.isEmpty) {
-                                    return 'Username cannot be empty';
+                                    return 'Email cannot be empty';
                                   }
                                   return null;
                                 },
+                                onSaved: (value) => _email = value!,
                                 cursorColor: Colors.white,
                                 decoration: InputDecoration(
                                   fillColor: Colors.white,
@@ -130,11 +133,12 @@ class _MainLoginPageState extends State<MainLoginPage> {
                                 obscureText: _obscureText,
                                 cursorColor: Colors.white,
                                 validator: (value) {
-                                  if (value!.isEmpty) {
-                                    return 'Password cannot be empty';
+                                  if (value!.length < 8) {
+                                    return 'Password should be more then 7 characters';
                                   }
                                   return null;
                                 },
+                                onSaved: (value) => _pwd = value!,
                                 decoration: InputDecoration(
                                   fillColor: Colors.white,
                                   hoverColor: Colors.white,
@@ -196,7 +200,7 @@ class _MainLoginPageState extends State<MainLoginPage> {
                                     color: Colors.black,
                                   ),
                                 ),
-                                onPressed: () => moveToHome(context),
+                                onPressed: Login,
                               ),
                               const SizedBox(
                                 height: 10.0,
@@ -321,5 +325,27 @@ class _MainLoginPageState extends State<MainLoginPage> {
         ),
       ),
     );
+  }
+
+  Future<void> Login() async {
+    final FormState = _formkey.currentState;
+    if (FormState!.validate()) {
+      FormState.save();
+      try {
+        final User user = (await FirebaseAuth.instance
+                .signInWithEmailAndPassword(email: _email!, password: _pwd!))
+            .user!;
+        Navigator.pushReplacement(context,
+            MaterialPageRoute<Map>(builder: (BuildContext context) {
+          return HomeClass(user);
+        }));
+      } catch (e) {
+        print(e);
+      }
+    }
+  }
+
+  void Register() {
+    Navigator.pushReplacementNamed(context, '/screen4');
   }
 }

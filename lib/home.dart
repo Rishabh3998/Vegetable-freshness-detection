@@ -28,77 +28,77 @@ class _HomeState extends State<HomeClass> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-        Container(
-            height: 50,
-            width: 250,
-            child: FlatButton(
-              onPressed: () {
-                Navigator.pushNamed(context, '/screen7');
-              },
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(5.0),
-                  side: const BorderSide(color: Color(0xffF7DC6F))),
-              color: const Color(0xff196F3D),
-              textColor: const Color(0xffF7DC6F),
-              padding: const EdgeInsets.all(12.0),
-              child: const Text('Identify The Freshness',
-                  style: TextStyle(fontFamily: 'Comfortaa')),
-            )),
-        const SizedBox(
-          height: 100.0,
-        ),
-        Container(
-            height: 50,
-            width: 250,
-            child: FlatButton(
-              onPressed: null,
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(5.0),
-                  side: const BorderSide(color: Color(0xffF7DC6F))),
-              color: const Color(0xff196F3D),
-              textColor: const Color(0xffF7DC6F),
-              padding: const EdgeInsets.all(12.0),
-              child: const Text('Nutritional Analysis',
-                  style: TextStyle(fontFamily: 'Comfortaa')),
-            )),
-        const SizedBox(
-          height: 100.0,
-        ),
-        Container(
-            height: 50,
-            width: 250,
-            child: FlatButton(
-              onPressed: () {
-                Navigator.pushNamed(context, '/screen8');
-              },
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(5.0),
-                  side: const BorderSide(color: Color(0xffF7DC6F))),
-              color: const Color(0xff196F3D),
-              textColor: const Color(0xffF7DC6F),
-              padding: const EdgeInsets.all(12.0),
-              child: const Text('Rancidity of oil',
-                  style: TextStyle(fontFamily: 'Comfortaa')),
-            )),
-        const SizedBox(
-          height: 100.0,
-        ),
-        Container(
-            height: 50,
-            width: 250,
-            child: RaisedButton(
-              onPressed: () {
-                Navigator.pushNamed(context, '/screen6');
-              },
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(5.0),
-                  side: const BorderSide(color: Color(0xffF7DC6F))),
-              color: const Color(0xff196F3D),
-              textColor: const Color(0xffF7DC6F),
-              padding: const EdgeInsets.all(12.0),
-              child: const Text('About Us',
-                  style: TextStyle(fontFamily: 'Comfortaa')),
-            ))
+            Container(
+                height: 50,
+                width: 250,
+                child: FlatButton(
+                  onPressed: () {
+                    Navigator.pushNamed(context, '/screen7');
+                  },
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(5.0),
+                      side: const BorderSide(color: Color(0xffF7DC6F))),
+                  color: const Color(0xff196F3D),
+                  textColor: const Color(0xffF7DC6F),
+                  padding: const EdgeInsets.all(12.0),
+                  child: const Text('Identify The Freshness',
+                      style: TextStyle(fontFamily: 'Comfortaa')),
+                )),
+            const SizedBox(
+              height: 100.0,
+            ),
+            Container(
+                height: 50,
+                width: 250,
+                child: FlatButton(
+                  onPressed: null,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(5.0),
+                      side: const BorderSide(color: Color(0xffF7DC6F))),
+                  color: const Color(0xff196F3D),
+                  textColor: const Color(0xffF7DC6F),
+                  padding: const EdgeInsets.all(12.0),
+                  child: const Text('Nutritional Analysis',
+                      style: TextStyle(fontFamily: 'Comfortaa')),
+                )),
+            const SizedBox(
+              height: 100.0,
+            ),
+            Container(
+                height: 50,
+                width: 250,
+                child: FlatButton(
+                  onPressed: () {
+                    Navigator.pushNamed(context, '/screen8');
+                  },
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(5.0),
+                      side: const BorderSide(color: Color(0xffF7DC6F))),
+                  color: const Color(0xff196F3D),
+                  textColor: const Color(0xffF7DC6F),
+                  padding: const EdgeInsets.all(12.0),
+                  child: const Text('Rancidity of oil',
+                      style: TextStyle(fontFamily: 'Comfortaa')),
+                )),
+            const SizedBox(
+              height: 100.0,
+            ),
+            Container(
+                height: 50,
+                width: 250,
+                child: RaisedButton(
+                  onPressed: () {
+                    Navigator.pushNamed(context, '/screen6');
+                  },
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(5.0),
+                      side: const BorderSide(color: Color(0xffF7DC6F))),
+                  color: const Color(0xff196F3D),
+                  textColor: const Color(0xffF7DC6F),
+                  padding: const EdgeInsets.all(12.0),
+                  child: const Text('About Us',
+                      style: TextStyle(fontFamily: 'Comfortaa')),
+                ))
           ],
         ));
   }

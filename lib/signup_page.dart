@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+//import 'package:firebase_core/firebase_core.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:vegetable_app/mainlogin_page.dart';
 
@@ -7,10 +9,11 @@ class SignUpPage extends StatefulWidget {
   _SignUpPageState createState() => _SignUpPageState();
 }
 
+String? _email, _pwd, _name;
+final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
 class _SignUpPageState extends State<SignUpPage> {
   bool _obscureText = true;
-
-  // String _password;
 
   // Toggles the password show status
   void _toggle() {
@@ -19,34 +22,33 @@ class _SignUpPageState extends State<SignUpPage> {
     });
   }
 
-  bool changeButton = false;
-  final _formKey = GlobalKey<FormState>();
+  // bool changeButton = false;
 
-  moveToLogin(BuildContext context) async {
-    if (_formKey.currentState!.validate()) {
-      setState(
-        () {
-          changeButton = true;
-        },
-      );
-      await Future.delayed(
-        const Duration(
-          milliseconds: 300,
-        ),
-      );
-      await Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => MainLoginPage(),
-        ),
-      );
-      setState(
-        () {
-          changeButton = false;
-        },
-      );
-    }
-  }
+  // moveToLogin(BuildContext context) async {
+  //   if (_formKey.currentState!.validate()) {
+  //     setState(
+  //       () {
+  //         changeButton = true;
+  //       },
+  //     );
+  //     await Future.delayed(
+  //       const Duration(
+  //         milliseconds: 300,
+  //       ),
+  //     );
+  //     await Navigator.push(
+  //       context,
+  //       MaterialPageRoute(
+  //         builder: (context) => MainLoginPage(),
+  //       ),
+  //     );
+  //     setState(
+  //       () {
+  //         changeButton = false;
+  //       },
+  //     );
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -88,12 +90,13 @@ class _SignUpPageState extends State<SignUpPage> {
                         ),
                         TextFormField(
                           cursorColor: Colors.white,
-                          validator: (value) {
-                            if (value!.isEmpty) {
+                          validator: (input) {
+                            if (input!.isEmpty) {
                               return 'Name cannot be empty';
                             }
                             return null;
                           },
+                          onSaved: (input) => _name = input!,
                           decoration: InputDecoration(
                             fillColor: Colors.white,
                             hoverColor: Colors.white,
@@ -124,12 +127,13 @@ class _SignUpPageState extends State<SignUpPage> {
                         ),
                         TextFormField(
                           cursorColor: Colors.white,
-                          validator: (value) {
-                            if (value!.isEmpty) {
+                          validator: (input) {
+                            if (input!.isEmpty) {
                               return 'Email cannot be empty';
                             }
                             return null;
                           },
+                          onSaved: (input) => _email = input!,
                           decoration: InputDecoration(
                             fillColor: Colors.white,
                             hoverColor: Colors.white,
@@ -160,12 +164,13 @@ class _SignUpPageState extends State<SignUpPage> {
                         ),
                         TextFormField(
                           obscureText: _obscureText,
-                          validator: (value) {
-                            if (value!.isEmpty) {
-                              return 'Password cannot be empty';
+                          validator: (input) {
+                            if (input!.length < 8) {
+                              return 'Password should be more then 8 characters';
                             }
                             return null;
                           },
+                          onSaved: (input) => _pwd = input!,
                           cursorColor: Colors.white,
                           decoration: InputDecoration(
                             fillColor: Colors.white,
@@ -222,7 +227,7 @@ class _SignUpPageState extends State<SignUpPage> {
                               textStyle: const TextStyle(
                                 color: Colors.black,
                               )),
-                          onPressed: () => moveToLogin(context),
+                          onPressed: signUp,
                         ),
                         const SizedBox(
                           height: 10.0,
@@ -330,5 +335,23 @@ class _SignUpPageState extends State<SignUpPage> {
         ),
       ),
     );
+  }
+
+  Future<void> signUp() async {
+    // ignore: non_constant_identifier_names
+    final FormState = _formKey.currentState;
+    if (FormState!.validate()) {
+      FormState.save();
+      try {
+        final User user = (await FirebaseAuth.instance
+                .createUserWithEmailAndPassword(
+                    email: _email!, password: _pwd!))
+            .user!;
+        user.sendEmailVerification();
+        Navigator.pushReplacementNamed(context, '/screen2');
+      } catch (e) {
+        print(e);
+      }
+    }
   }
 }

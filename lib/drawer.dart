@@ -58,8 +58,8 @@ class _MyDrawerState extends State<MyDrawer> {
               },
             ),
             ListTile(
-              title: const Text('Categories/Log In'),
-              leading: const Icon(Icons.category_rounded),
+              title: const Text('Log In'),
+              leading: const Icon(Icons.login_rounded),
               onTap: () {
                 Navigator.push(
                   context,
@@ -70,8 +70,8 @@ class _MyDrawerState extends State<MyDrawer> {
               },
             ),
             ListTile(
-              title: const Text('Saved/Sign Up'),
-              leading: const Icon(Icons.save),
+              title: const Text('Sign Up'),
+              leading: const Icon(Icons.app_registration),
               onTap: () {
                 Navigator.push(
                   context,
@@ -120,8 +120,8 @@ class _MyDrawerState extends State<MyDrawer> {
               },
             ),
             ListTile(
-              title: const Text('Feedback/Report Error'),
-              leading: const Icon(Icons.feed),
+              title: const Text('Log Out'),
+              leading: const Icon(Icons.logout_rounded),
               onTap: () {
                 // Update the state of the app.
                 // ...
