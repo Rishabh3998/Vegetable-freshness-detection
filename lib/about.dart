@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:vegetable_app/drawer.dart';
 
 class AboutUs extends StatefulWidget {
+  const AboutUs({Key? key}) : super(key: key);
+
   @override
   _AboutUsState createState() => _AboutUsState();
 }
