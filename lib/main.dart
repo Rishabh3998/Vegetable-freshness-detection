@@ -8,7 +8,6 @@ import 'package:vegetable_app/home_page.dart';
 import 'package:vegetable_app/login_page.dart';
 import 'package:vegetable_app/mainlogin_page.dart';
 import 'package:vegetable_app/services.dart';
-import 'package:vegetable_app/signup.dart';
 import 'package:vegetable_app/signup_page.dart';
 import 'package:vegetable_app/welcome.dart';
 

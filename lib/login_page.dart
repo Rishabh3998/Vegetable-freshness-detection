@@ -1,3 +1,5 @@
+// App Starting Screen
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:vegetable_app/home_page.dart';
@@ -5,6 +7,8 @@ import 'package:vegetable_app/mainlogin_page.dart';
 import 'package:vegetable_app/signup_page.dart';
 
 class LoginPage extends StatefulWidget {
+  const LoginPage({Key? key}) : super(key: key);
+
   @override
   _LoginPageState createState() => _LoginPageState();
 }
