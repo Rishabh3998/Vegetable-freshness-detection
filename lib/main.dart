@@ -1,5 +1,4 @@
-//import 'dart:io';
-
+import 'dart:io';
 //import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -16,7 +15,7 @@ void main() {
   // future:
   Firebase.initializeApp();
   // final cameras = await availableCameras();
-  //final firstCamera = cameras.first;
+  // final firstCamera = cameras.first;
   runApp(
     const MyApp(
         //camera: firstCamera,
