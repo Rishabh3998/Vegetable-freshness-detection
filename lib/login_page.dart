@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:vegetable_app/home_page.dart';
+import 'package:vegetable_app/instructions.dart';
 import 'package:vegetable_app/mainlogin_page.dart';
 import 'package:vegetable_app/signup_page.dart';
 
@@ -157,7 +158,7 @@ class _LoginPageState extends State<LoginPage> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => HomePage(),
+                                builder: (context) => const Instructions(),
                               ),
                             );
                             setState(() {});

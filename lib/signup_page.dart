@@ -7,6 +7,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:vegetable_app/mainlogin_page.dart';
 
 class SignUpPage extends StatefulWidget {
+  const SignUpPage({Key? key}) : super(key: key);
+
   @override
   _SignUpPageState createState() => _SignUpPageState();
 }
@@ -91,6 +93,10 @@ class _SignUpPageState extends State<SignUpPage> {
                           height: 180.0,
                         ),
                         TextFormField(
+                          keyboardType: TextInputType.text,
+                          style: const TextStyle(
+                            color: Colors.white,
+                          ),
                           cursorColor: Colors.white,
                           validator: (input) {
                             if (input!.isEmpty) {
@@ -128,6 +134,10 @@ class _SignUpPageState extends State<SignUpPage> {
                           height: 10.0,
                         ),
                         TextFormField(
+                          keyboardType: TextInputType.text,
+                          style: const TextStyle(
+                            color: Colors.white,
+                          ),
                           cursorColor: Colors.white,
                           validator: (input) {
                             if (input!.isEmpty) {
@@ -165,6 +175,10 @@ class _SignUpPageState extends State<SignUpPage> {
                           height: 10.0,
                         ),
                         TextFormField(
+                          keyboardType: TextInputType.text,
+                          style: const TextStyle(
+                            color: Colors.white,
+                          ),
                           obscureText: _obscureText,
                           validator: (input) {
                             if (input!.length < 8) {
@@ -350,9 +364,10 @@ class _SignUpPageState extends State<SignUpPage> {
                     email: _email!, password: _pwd!))
             .user!;
         user.sendEmailVerification();
-        Navigator.pushReplacementNamed(context, '/screen3');
+        Navigator.pushReplacementNamed(context, '/screen7');
       } catch (e) {
         print(e);
+        Navigator.pushReplacementNamed(context, '/screen8');
       }
     }
   }

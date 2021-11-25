@@ -5,6 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:vegetable_app/home.dart';
 import 'package:vegetable_app/home_page.dart';
+import 'package:vegetable_app/instructions.dart';
 // import 'package:vegetable_app/home_page.dart';
 import 'package:vegetable_app/signup_page.dart';
 
@@ -96,6 +97,10 @@ class _MainLoginPageState extends State<MainLoginPage> {
                           child: Column(
                             children: [
                               TextFormField(
+                                keyboardType: TextInputType.text,
+                                style: const TextStyle(
+                                  color: Colors.white,
+                                ),
                                 validator: (value) {
                                   if (value!.isEmpty) {
                                     return 'Email cannot be empty';
@@ -133,6 +138,10 @@ class _MainLoginPageState extends State<MainLoginPage> {
                                 height: 10.0,
                               ),
                               TextFormField(
+                                keyboardType: TextInputType.text,
+                                style: const TextStyle(
+                                  color: Colors.white,
+                                ),
                                 obscureText: _obscureText,
                                 cursorColor: Colors.white,
                                 validator: (value) {
@@ -309,9 +318,11 @@ class _MainLoginPageState extends State<MainLoginPage> {
                                 ),
                                 onPressed: () {
                                   Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => SignUpPage()));
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => SignUpPage(),
+                                    ),
+                                  );
                                   setState(() {});
                                 },
                               ),
@@ -340,15 +351,15 @@ class _MainLoginPageState extends State<MainLoginPage> {
             .user!;
         Navigator.pushReplacement(context,
             MaterialPageRoute<Map>(builder: (BuildContext context) {
-          return const HomePage();
+          return const Instructions();
         }));
       } catch (e) {
-        print(e);
+        Navigator.pushReplacementNamed(context, '/screen8');
       }
     }
   }
 
   void Register() {
-    Navigator.pushReplacementNamed(context, '/screen4');
+    Navigator.pushReplacementNamed(context, '/screen7');
   }
 }

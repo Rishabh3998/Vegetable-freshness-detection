@@ -139,33 +139,6 @@ class _AboutUsState extends State<AboutUs> {
                 ),
               ),
             ),
-            // Padding(
-            //   padding: const EdgeInsets.all(8.0),
-            //   child: MaterialButton(
-            //     onPressed: () {
-            //       Navigator.push(
-            //           context,
-            //           MaterialPageRoute(
-            //             builder: (context) => FAQ(),
-            //           ));
-            //     },
-            //     color: const Color(0xff196F3D),
-            //     height: 60,
-            //     minWidth: 250,
-            //     splashColor: const Color(0xff58D68D),
-            //     child: const Text(
-            //       "F.A.Q 🤔",
-            //       style: TextStyle(
-            //         fontFamily: 'Comfortaa',
-            //         color: Color(0xffF7DC6F),
-            //         fontSize: 20.0,
-            //       ),
-            //     ),
-            //     shape: RoundedRectangleBorder(
-            //       borderRadius: BorderRadius.circular(9.0),
-            //     ),
-            //   ),
-            // ),
           ],
         ),
         drawer: const MyDrawer(),

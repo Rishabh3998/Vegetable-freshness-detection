@@ -1,12 +1,18 @@
-Fresh Apple
-Fresh Banana
-Fresh Bitter Gourd
+Fresh Bittergourd
+Fresh Brinjal
 Fresh Capsicum
-Fresh Orange
+Fresh Onion
+Fresh Potato
 Fresh Tomato
-Stale Apple
-Stale Banana
-Stale Bitter Gourd
-Stale Capsicum
-Stale Orange
-Stale Tomato
+Rotten Bittergourd
+Rotten Brinjal
+Rotten Capsicum
+Rotten Onion
+Rotten Potato
+Rotten Tomato
+Semirotten Bittergourd
+Semirotten Brinjal
+Semirotten Capsicum
+Semirotten Onion
+Semirotten Potato
+Semirotten Tomato

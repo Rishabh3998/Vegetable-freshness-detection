@@ -1,6 +1,7 @@
 //Drawer
 
 import 'package:flutter/material.dart';
+import 'package:vegetable_app/home_page.dart';
 import 'package:vegetable_app/login_page.dart';
 import 'package:vegetable_app/mainlogin_page.dart';
 import 'package:vegetable_app/signup_page.dart';
@@ -45,6 +46,12 @@ class _MyDrawerState extends State<MyDrawer> {
               onTap: () {
                 // Update the state of the app.
                 // ...
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const HomePage(),
+                  ),
+                );
               },
             ),
             ListTile(

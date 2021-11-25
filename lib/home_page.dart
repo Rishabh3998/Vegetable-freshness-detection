@@ -20,34 +20,37 @@ class _HomePageState extends State<HomePage> {
   String? ip;
   ImagePicker picker = ImagePicker();
 
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   _loading = true;
-  //   //ip = widget.imagepath;
-  //   loadModel().then((value) {
-  //     setState(() {
-  //       _loading = false;
-  //     });
-  //   });
-  // }
+  @override
+  void initState() {
+    super.initState();
+    _loading = true;
+    //ip = widget.imagepath;
+    loadModel().then((value) {
+      setState(() {
+        _loading = false;
+      });
+    });
+  }
 
-  // loadModel() async {
-  //   await Tflite.loadModel(
-  //     model: "assets/float16_optimised_model_Inceptionv3.tflite",
-  //     labels: "assets/ImageLabels.txt",
-  //     numThreads: 4,
-  //   );
-  // }
+  loadModel() async {
+    await Tflite.loadModel(
+      model: "assets/Model/float16_optimised_model_Inceptionv3.tflite",
+      labels: "assets/Model/ImageLabels.txt",
+      numThreads: 1,
+      isAsset: true,
+      useGpuDelegate: false,
+    );
+  }
 
   classifyImage(File image) async {
     var output = await Tflite.runModelOnImage(
-        path: image.path,
-        imageMean: 0.0,
-        imageStd: 255.0,
-        numResults: 2,
-        threshold: 0.2,
-        asynch: true);
+      path: image.path,
+      imageMean: 0.0,
+      imageStd: 255.0,
+      numResults: 2,
+      threshold: 0.2,
+      asynch: true,
+    );
     setState(() {
       _loading = false;
       _outputs = output;
