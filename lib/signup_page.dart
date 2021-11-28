@@ -359,11 +359,13 @@ class _SignUpPageState extends State<SignUpPage> {
     if (FormState!.validate()) {
       FormState.save();
       try {
-        final User user = (await FirebaseAuth.instance
-                .createUserWithEmailAndPassword(
-                    email: _email!, password: _pwd!))
-            .user!;
-        user.sendEmailVerification();
+        final User user =
+            (await FirebaseAuth.instance.createUserWithEmailAndPassword(
+          email: _email!,
+          password: _pwd!,
+        ))
+                .user!;
+        await user.sendEmailVerification();
         Navigator.pushReplacementNamed(context, '/screen7');
       } catch (e) {
         print(e);

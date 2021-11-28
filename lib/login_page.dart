@@ -19,21 +19,14 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        appBar: AppBar(
+          title: const Text("Vegetable Freshness Detector"),
+          backgroundColor: Colors.black,
+        ),
         backgroundColor: Colors.white,
         body: SingleChildScrollView(
           child: Column(
             children: <Widget>[
-              const SizedBox(
-                height: 50.0,
-              ),
-              Text(
-                "Vegetable Freshness Detector",
-                style: GoogleFonts.raleway(
-                  fontStyle: FontStyle.normal,
-                  fontSize: 30.0,
-                  fontWeight: FontWeight.w700,
-                ),
-              ),
               Container(
                 width: (MediaQuery.of(context).size.width),
                 height: 400,
