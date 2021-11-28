@@ -110,7 +110,7 @@ class _HomePageState extends State<HomePage> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               _loading
-                  ? Container(
+                  ? const SizedBox(
                       height: 300,
                       width: 300,
                     )
