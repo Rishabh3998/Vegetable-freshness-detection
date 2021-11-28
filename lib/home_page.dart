@@ -36,7 +36,7 @@ class _HomePageState extends State<HomePage> {
     await Tflite.loadModel(
       model: "assets/Model/float16_model_Inceptionv3.tflite",
       labels: "assets/Model/ImageLabels.txt",
-      numThreads: 1,
+      numThreads: 4,
       isAsset: true,
       useGpuDelegate: false,
     );
@@ -46,11 +46,12 @@ class _HomePageState extends State<HomePage> {
     var output = await Tflite.runModelOnImage(
       path: image.path,
       imageMean: 0.0,
-      imageStd: 255.0,
-      numResults: 2,
-      threshold: 0.2,
+      imageStd: 224.0,
+      numResults: 1,
+      threshold: 0.1,
       asynch: true,
     );
+    print(output);
     setState(() {
       _loading = false;
       _outputs = output;
