@@ -36,7 +36,7 @@ class _HomePageState extends State<HomePage> {
     await Tflite.loadModel(
       model: "assets/Model/float16_model_Inceptionv3.tflite",
       labels: "assets/Model/ImageLabels.txt",
-      numThreads: 1,
+      numThreads: 4,
       isAsset: true,
       useGpuDelegate: false,
     );
@@ -109,7 +109,7 @@ class _HomePageState extends State<HomePage> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               _loading
-                  ? Container(
+                  ? const SizedBox(
                       height: 300,
                       width: 300,
                     )
