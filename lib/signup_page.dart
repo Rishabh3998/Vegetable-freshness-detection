@@ -2,9 +2,21 @@
 
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 //import 'package:firebase_core/firebase_core.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:vegetable_app/googleSign.dart';
+import 'package:vegetable_app/home_page.dart';
 import 'package:vegetable_app/mainlogin_page.dart';
+import 'package:vegetable_app/myAccount.dart';
+
+GoogleSignIn _googleSignIn = GoogleSignIn(
+  scopes: [
+    'email',
+    'https://www.googleapis.com/auth/contacts.readonly',
+  ],
+);
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({Key? key}) : super(key: key);
@@ -53,6 +65,8 @@ class _SignUpPageState extends State<SignUpPage> {
   //     );
   //   }
   // }
+
+  bool _isSigningIn = false;
 
   @override
   Widget build(BuildContext context) {
@@ -309,38 +323,64 @@ class _SignUpPageState extends State<SignUpPage> {
                         const SizedBox(
                           height: 20.0,
                         ),
-                        ElevatedButton(
-                          // icon: Icon(
-                          //   Icons.g,
-                          //   color: Colors.pink,
-                          //   size: 24.0,
-                          // ),
-                          child: Text("Log In with Google",
-                              style: GoogleFonts.raleway(
-                                fontStyle: FontStyle.normal,
-                                color: Colors.white,
-                                fontWeight: FontWeight.w600,
-                                fontSize: 19.0,
-                              )),
-                          style: ElevatedButton.styleFrom(
-                            primary: Colors.blue,
-                            minimumSize: const Size(double.infinity, 50.0),
-                            side: const BorderSide(
-                                width: 1.0, color: Colors.blue),
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10.0)),
-                            textStyle: const TextStyle(
-                              color: Colors.black,
-                            ),
-                          ),
-                          onPressed: () {
-                            // Navigator.push(
-                            //     context,
-                            //     MaterialPageRoute(
-                            //         builder: (context) => MainLoginPage()));
-                            // setState(() {});
-                          },
-                        ),
+                        // FutureBuilder(
+                        //   future: Authentication.initializeFirebase(
+                        //       context: context),
+                        //   builder: (context, snapshot) {
+                        //     if (snapshot.hasError) {
+                        //       return const Text('Error initializing Firebase');
+                        //     } else if (snapshot.connectionState ==
+                        //         ConnectionState.done) {
+                        //       return ElevatedButton(
+                        //         child: Text("Log In with Google",
+                        //             style: GoogleFonts.raleway(
+                        //               fontStyle: FontStyle.normal,
+                        //               color: Colors.white,
+                        //               fontWeight: FontWeight.w600,
+                        //               fontSize: 19.0,
+                        //             )),
+                        //         style: ElevatedButton.styleFrom(
+                        //           primary: Colors.blue,
+                        //           minimumSize:
+                        //               const Size(double.infinity, 50.0),
+                        //           side: const BorderSide(
+                        //               width: 1.0, color: Colors.blue),
+                        //           shape: RoundedRectangleBorder(
+                        //               borderRadius:
+                        //                   BorderRadius.circular(10.0)),
+                        //           textStyle: const TextStyle(
+                        //             color: Colors.black,
+                        //           ),
+                        //         ),
+                        //         onPressed: () async {
+                        //           setState(() {
+                        //             _isSigningIn = true;
+                        //           });
+
+                        //           // TODO: Add a method call to the Google Sign-In authentication
+                        //           User? user =
+                        //               await Authentication.signInWithGoogle(
+                        //                   context: context);
+
+                        //           setState(() {
+                        //             _isSigningIn = false;
+                        //           });
+
+                        //           if (user != null) {
+                        //             Navigator.of(context).pushReplacement(
+                        //               MaterialPageRoute(
+                        //                 builder: (context) => MyAccount(
+                        //                   user: user,
+                        //                 ),
+                        //               ),
+                        //             );
+                        //           }
+                        //         },
+                        //       );
+                        //     }
+                        //     return const CircularProgressIndicator();
+                        //   },
+                        // ),
                       ],
                     ),
                   ),
@@ -352,6 +392,23 @@ class _SignUpPageState extends State<SignUpPage> {
       ),
     );
   }
+
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+
+//register with email & password & save username instantly
+  // Future registerWithEmailAndPassword(
+  //     String name, String password, String email) async {
+  //   try {
+  //     UserCredential result = await _auth.createUserWithEmailAndPassword(
+  //         email: email, password: password);
+  //     User user = result.user;
+  //     user.updateDisplayName(displayName: name); //added this line
+  //     return _user(user);
+  //   } catch (e) {
+  //     print(e.toString());
+  //     return null;
+  //   }
+  // }
 
   Future<void> signUp() async {
     // ignore: non_constant_identifier_names
@@ -365,12 +422,51 @@ class _SignUpPageState extends State<SignUpPage> {
           password: _pwd!,
         ))
                 .user!;
+        user.updateDisplayName(_name);
         await user.sendEmailVerification();
         Navigator.pushReplacementNamed(context, '/screen7');
-      } catch (e) {
-        print(e);
-        Navigator.pushReplacementNamed(context, '/screen8');
+      } on FirebaseAuthException catch (e) {
+        switch (e.code) {
+          case 'invalid-email':
+            {
+              displayToast('Invalid email');
+              break;
+            }
+
+          case 'email-already-in-use':
+            {
+              displayToast('Email already in use');
+              break;
+            }
+
+          case 'operation-not-allowed':
+            {
+              displayToast('Invalid Operation');
+              break;
+            }
+
+          case 'weak-password':
+            {
+              displayToast('Password is Weak');
+              break;
+            }
+
+          default:
+            displayToast(e.toString());
+        }
       }
     }
+  }
+
+  displayToast(String message) {
+    Fluttertoast.showToast(
+      msg: message,
+      toastLength: Toast.LENGTH_LONG,
+      gravity: ToastGravity.BOTTOM,
+      timeInSecForIosWeb: 1,
+      backgroundColor: const Color(0xffC8C6C6),
+      textColor: Colors.black,
+      fontSize: 20.0,
+    );
   }
 }

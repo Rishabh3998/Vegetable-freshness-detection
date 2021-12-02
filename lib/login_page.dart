@@ -1,8 +1,7 @@
 // App Starting Screen
 
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:vegetable_app/home_page.dart';
+import 'package:google_fonts/google_fonts.dart' show GoogleFonts;
 import 'package:vegetable_app/instructions.dart';
 import 'package:vegetable_app/mainlogin_page.dart';
 import 'package:vegetable_app/signup_page.dart';
@@ -20,8 +19,16 @@ class _LoginPageState extends State<LoginPage> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          title: const Text("Vegetable Freshness Detector"),
+          title: Text(
+            "Vegetable Freshness Detector",
+            style: GoogleFonts.raleway(
+              fontStyle: FontStyle.normal,
+              fontSize: 20.0,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
           backgroundColor: Colors.black,
+          centerTitle: true,
         ),
         backgroundColor: Colors.white,
         body: SingleChildScrollView(

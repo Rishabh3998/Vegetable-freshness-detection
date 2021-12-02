@@ -1,4 +1,3 @@
-//import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:vegetable_app/about.dart';
@@ -11,17 +10,24 @@ import 'package:vegetable_app/welcome.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  // future:
   Firebase.initializeApp();
-  // final cameras = await availableCameras();
-  // final firstCamera = cameras.first;
   runApp(
-    const MyApp(
-        //camera: firstCamera,
-
-        ),
+    const MyApp(),
   );
 }
+
+// Future<void> main() async {
+//   WidgetsFlutterBinding.ensureInitialized();
+//   SharedPreferences preferences = await SharedPreferences.getInstance();
+//   var email = preferences.getString("emailText");
+//   // print(email);
+
+//   runApp(
+//     MaterialApp(
+//       home: email == null ? const MyApp() : const HomePage(),
+//     ),
+//   );
+// }
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);

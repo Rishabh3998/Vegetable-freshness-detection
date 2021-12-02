@@ -3,7 +3,7 @@
 // 2) Potato
 // 3) Onion
 // 4) Capsicum
-// 5) Bitter gourd
+// 5) Carrot
 // 6) Brinjal
 
 // Please use the image of one of these 6 vegetables only. The app will not detect the quality of any other vegetable.
@@ -64,7 +64,7 @@ class _InstructionsState extends State<Instructions> {
                         height: 20.0,
                       ),
                       Text(
-                        "Important: As of now the app can only detect the quality of following 6 vegetables \n\n 1) Tomato \n 2) Potato \n 3) Onion \n 4) Capsicum \n 5) Bitter gourd \n 6) Brinjal \n",
+                        "Important: As of now the app can only detect the quality of following 6 vegetables \n\n 1) Tomato \n 2) Potato \n 3) Onion \n 4) Capsicum \n 5) Carrot \n 6) Brinjal \n",
                         style: TextStyle(
                           fontFamily: "Comfortaa",
                           fontSize: 22.0,

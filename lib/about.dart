@@ -26,6 +26,7 @@ class _AboutUsState extends State<AboutUs> {
               color: Colors.white,
             ),
           ),
+          centerTitle: true,
         ),
         backgroundColor: Colors.white,
         body: Column(

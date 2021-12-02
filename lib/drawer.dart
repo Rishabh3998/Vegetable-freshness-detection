@@ -1,9 +1,16 @@
 //Drawer
 
+// ignore_for_file: prefer_const_constructors
+
 import 'package:flutter/material.dart';
+import 'package:vegetable_app/about.dart';
 import 'package:vegetable_app/home_page.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:vegetable_app/login_page.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:vegetable_app/mainlogin_page.dart';
+import 'package:vegetable_app/myAccount.dart';
 import 'package:vegetable_app/signup_page.dart';
 
 class MyDrawer extends StatefulWidget {
@@ -13,6 +20,18 @@ class MyDrawer extends StatefulWidget {
   _MyDrawerState createState() => _MyDrawerState();
 }
 
+final FirebaseAuth auth = FirebaseAuth.instance;
+final User? user = auth.currentUser;
+
+// User? user = FirebaseAuth.instance.currentUser;
+
+void inputData() async {
+  User? user = auth.currentUser;
+  final uid = user?.uid == null ? null : user!.uid;
+  print(user);
+  // return uid;
+}
+
 class _MyDrawerState extends State<MyDrawer> {
   @override
   Widget build(BuildContext context) {
@@ -20,18 +39,18 @@ class _MyDrawerState extends State<MyDrawer> {
       child: Drawer(
         child: ListView(
           children: <Widget>[
-            const UserAccountsDrawerHeader(
+            UserAccountsDrawerHeader(
               accountName: Text(
-                "Rishabh Kumar",
+                user?.displayName != null ? user!.displayName! : "Name",
                 style: TextStyle(fontSize: 25.0),
               ),
               accountEmail: Text(
-                'rsk1998200@gmail.com',
+                user?.email != null ? user!.email! : "Email",
                 style: TextStyle(fontSize: 15.0),
               ),
-              currentAccountPicture: CircleAvatar(
-                backgroundImage: AssetImage('assets/5.jpg'),
-              ),
+              // currentAccountPicture: CircleAvatar(
+              //   backgroundImage: AssetImage('assets/5.jpg'),
+              // ),
               decoration: BoxDecoration(
                 color: Colors.black,
                 // image: DecorationImage(
@@ -44,8 +63,6 @@ class _MyDrawerState extends State<MyDrawer> {
               title: const Text('Home'),
               leading: const Icon(Icons.home),
               onTap: () {
-                // Update the state of the app.
-                // ...
                 Navigator.push(
                   context,
                   MaterialPageRoute(
@@ -54,18 +71,20 @@ class _MyDrawerState extends State<MyDrawer> {
                 );
               },
             ),
-            ListTile(
-              title: const Text('My Account'),
-              leading: const Icon(Icons.person),
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => LoginPage(),
-                  ),
-                );
-              },
-            ),
+            // ListTile(
+            //   title: const Text('My Account'),
+            //   leading: const Icon(Icons.person),
+            //   onTap: () {
+            //     Navigator.push(
+            //       context,
+            //       MaterialPageRoute(
+            //         builder: (context) => MyAccount(
+            //           user: user,
+            //         ),
+            //       ),
+            //     );
+            //   },
+            // ),
             ListTile(
               title: const Text('Log In'),
               leading: const Icon(Icons.login_rounded),
@@ -85,7 +104,7 @@ class _MyDrawerState extends State<MyDrawer> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => SignUpPage(),
+                    builder: (context) => const SignUpPage(),
                   ),
                 );
               },
@@ -93,10 +112,7 @@ class _MyDrawerState extends State<MyDrawer> {
             ListTile(
               title: const Text('Settings'),
               leading: const Icon(Icons.settings),
-              onTap: () {
-                // Update the state of the app.
-                // ...
-              },
+              onTap: inputData,
             ),
             const Divider(
               indent: 15.0,
@@ -110,35 +126,67 @@ class _MyDrawerState extends State<MyDrawer> {
               onTap: () {
                 // Update the state of the app.
                 // ...
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const AboutUs(),
+                  ),
+                );
               },
             ),
             ListTile(
-              title: const Text('Share with Friends'),
+              title: const Text('Want to Collaborate ?'),
               leading: const Icon(Icons.share),
-              onTap: () {
-                // Update the state of the app.
-                // ...
-              },
+              onTap: _launchURL,
             ),
-            ListTile(
-              title: const Text('Rate and Review'),
-              leading: const Icon(Icons.rate_review),
-              onTap: () {
-                // Update the state of the app.
-                // ...
-              },
-            ),
+            // ListTile(
+            //   title: const Text('Rate and Review'),
+            //   leading: const Icon(Icons.rate_review),
+            //   onTap: () {
+            //     // Update the state of the app.
+            //     // ...
+            //   },
+            // ),
             ListTile(
               title: const Text('Log Out'),
               leading: const Icon(Icons.logout_rounded),
-              onTap: () {
-                // Update the state of the app.
-                // ...
-              },
+              onTap: logout,
             ),
           ],
         ),
       ),
     );
+  }
+
+  _launchURL() async {
+    const _url = 'https://github.com/Rishabh3998/Vegetable-freshness-detection';
+    if (await canLaunch(_url)) {
+      await launch(_url);
+    } else {
+      throw 'Could not launch $_url';
+    }
+  }
+
+  displayToast(String message) {
+    Fluttertoast.showToast(
+      msg: message,
+      toastLength: Toast.LENGTH_LONG,
+      gravity: ToastGravity.BOTTOM,
+      timeInSecForIosWeb: 1,
+      backgroundColor: const Color(0xffC5C5C5),
+      textColor: Colors.black,
+      fontSize: 20.0,
+    );
+  }
+
+  Future logout() async {
+    await auth.signOut().then(
+          (value) => Navigator.of(context).pushAndRemoveUntil(
+            MaterialPageRoute(
+              builder: (context) => LoginPage(),
+            ),
+            (route) => false,
+          ),
+        );
   }
 }
