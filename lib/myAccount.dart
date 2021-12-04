@@ -1,5 +1,5 @@
 //Main Home Page for classification
-// ignore_for_file: file_names
+// ignore_for_file: file_names, unnecessary_string_interpolations
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -101,19 +101,19 @@ class _MyAccountState extends State<MyAccount> {
               const SizedBox(
                 height: 16.0,
               ),
-              const Text(
-                'Hello',
-                style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 26,
-                ),
-              ),
+              // const Text(
+              //   'Hello',
+              //   style: TextStyle(
+              //     color: Colors.black,
+              //     fontSize: 26,
+              //   ),
+              // ),
               const SizedBox(
                 height: 8.0,
               ),
               Text(
-                // _user.displayName!,
-                "Name",
+                _user.displayName!,
+                // "Name",
                 style: const TextStyle(
                   color: Colors.black,
                   fontSize: 26,
@@ -123,7 +123,7 @@ class _MyAccountState extends State<MyAccount> {
                 height: 8.0,
               ),
               Text(
-                '( ${_user.email!} )',
+                '${_user.email!}',
                 style: const TextStyle(
                   color: Colors.black,
                   fontSize: 20,
@@ -131,11 +131,11 @@ class _MyAccountState extends State<MyAccount> {
                 ),
               ),
               const SizedBox(height: 24.0),
-              const Text(
-                'You are now signed in using your Google account. To sign out of your account, click the "Sign Out" button below.',
-                style: TextStyle(
-                    color: Colors.black, fontSize: 14, letterSpacing: 0.2),
-              ),
+              // const Text(
+              //   'You are now signed in using your Google account. To sign out of your account, click the "Sign Out" button below.',
+              //   style: TextStyle(
+              //       color: Colors.black, fontSize: 14, letterSpacing: 0.2),
+              // ),
               const SizedBox(
                 height: 16.0,
               ),

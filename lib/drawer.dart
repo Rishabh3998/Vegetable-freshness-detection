@@ -20,19 +20,27 @@ class MyDrawer extends StatefulWidget {
   _MyDrawerState createState() => _MyDrawerState();
 }
 
-final FirebaseAuth auth = FirebaseAuth.instance;
-final User? user = auth.currentUser;
-
 // User? user = FirebaseAuth.instance.currentUser;
 
-void inputData() async {
-  User? user = auth.currentUser;
-  final uid = user?.uid == null ? null : user!.uid;
-  print(user);
-  // return uid;
-}
-
 class _MyDrawerState extends State<MyDrawer> {
+  final FirebaseAuth auth = FirebaseAuth.instance;
+  late User? user;
+
+  @override
+  void initState() {
+    setState(() {
+      user = auth.currentUser;
+    });
+    super.initState();
+  }
+
+  void inputData() async {
+    User? user = auth.currentUser;
+    final uid = user?.uid == null ? null : user!.uid;
+    print(user);
+    // return uid;
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -71,20 +79,24 @@ class _MyDrawerState extends State<MyDrawer> {
                 );
               },
             ),
-            // ListTile(
-            //   title: const Text('My Account'),
-            //   leading: const Icon(Icons.person),
-            //   onTap: () {
-            //     Navigator.push(
-            //       context,
-            //       MaterialPageRoute(
-            //         builder: (context) => MyAccount(
-            //           user: user,
-            //         ),
-            //       ),
-            //     );
-            //   },
-            // ),
+            ListTile(
+              title: const Text('My Account'),
+              leading: const Icon(Icons.person),
+              onTap: () {
+                if (user != null) {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => MyAccount(
+                        user: user!,
+                      ),
+                    ),
+                  );
+                } else {
+                  displayToast('Please Login to access details');
+                }
+              },
+            ),
             ListTile(
               title: const Text('Log In'),
               leading: const Icon(Icons.login_rounded),
@@ -109,11 +121,11 @@ class _MyDrawerState extends State<MyDrawer> {
                 );
               },
             ),
-            ListTile(
-              title: const Text('Settings'),
-              leading: const Icon(Icons.settings),
-              onTap: inputData,
-            ),
+            // ListTile(
+            //   title: const Text('Settings'),
+            //   leading: const Icon(Icons.settings),
+            //   onTap: inputData,
+            // ),
             const Divider(
               indent: 15.0,
               endIndent: 15.0,

@@ -424,7 +424,8 @@ class _SignUpPageState extends State<SignUpPage> {
                 .user!;
         user.updateDisplayName(_name);
         await user.sendEmailVerification();
-        Navigator.pushReplacementNamed(context, '/screen7');
+        displayToast('Signed up successfully');
+        Navigator.pushReplacementNamed(context, '/screen2');
       } on FirebaseAuthException catch (e) {
         switch (e.code) {
           case 'invalid-email':
@@ -452,7 +453,7 @@ class _SignUpPageState extends State<SignUpPage> {
             }
 
           default:
-            displayToast(e.toString());
+            displayToast(e.code.toString());
         }
       }
     }

@@ -4,6 +4,7 @@ import 'package:vegetable_app/about.dart';
 import 'package:vegetable_app/home_page.dart';
 import 'package:vegetable_app/instructions.dart';
 import 'package:vegetable_app/login_page.dart';
+import 'package:vegetable_app/mainlogin_page.dart';
 import 'package:vegetable_app/services.dart';
 import 'package:vegetable_app/signup_page.dart';
 import 'package:vegetable_app/welcome.dart';
@@ -45,6 +46,7 @@ class MyApp extends StatelessWidget {
         '/screen6': (BuildContext context) => const AboutUs(),
         '/screen7': (BuildContext context) => const Instructions(),
         '/screen8': (BuildContext context) => const SomethingWentWrong(),
+        '/screen9': (BuildContext context) => MainLoginPage(),
       },
       title: "Detector",
       home: const Welcomescreen(),

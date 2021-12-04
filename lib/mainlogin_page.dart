@@ -232,36 +232,38 @@ class _MainLoginPageState extends State<MainLoginPage> {
                               //   thickness: 2.0,
                               //   color: Colors.white70,
                               // ),
-                              Row(children: <Widget>[
-                                Expanded(
-                                  child: Container(
-                                    margin: const EdgeInsets.only(
-                                        left: 10.0, right: 20.0),
-                                    child: const Divider(
-                                      color: Colors.white,
-                                      height: 36,
+                              Row(
+                                children: <Widget>[
+                                  Expanded(
+                                    child: Container(
+                                      margin: const EdgeInsets.only(
+                                          left: 10.0, right: 20.0),
+                                      child: const Divider(
+                                        color: Colors.white,
+                                        height: 36,
+                                      ),
                                     ),
                                   ),
-                                ),
-                                Text(
-                                  "or",
-                                  style: GoogleFonts.raleway(
-                                    fontStyle: FontStyle.normal,
-                                    color: Colors.white,
-                                    fontSize: 25.0,
-                                  ),
-                                ),
-                                Expanded(
-                                  child: Container(
-                                    margin: const EdgeInsets.only(
-                                        left: 20.0, right: 10.0),
-                                    child: const Divider(
+                                  Text(
+                                    "or",
+                                    style: GoogleFonts.raleway(
+                                      fontStyle: FontStyle.normal,
                                       color: Colors.white,
-                                      height: 36,
+                                      fontSize: 25.0,
                                     ),
                                   ),
-                                ),
-                              ]),
+                                  Expanded(
+                                    child: Container(
+                                      margin: const EdgeInsets.only(
+                                          left: 20.0, right: 10.0),
+                                      child: const Divider(
+                                        color: Colors.white,
+                                        height: 36,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
                               const SizedBox(
                                 height: 10.0,
                               ),
@@ -359,9 +361,9 @@ class _MainLoginPageState extends State<MainLoginPage> {
                               //     // setState(() {});
                               //   },
                               // ),
-                              const SizedBox(
-                                height: 20.0,
-                              ),
+                              // const SizedBox(
+                              //   height: 20.0,
+                              // ),
                               ElevatedButton(
                                 child: Text(
                                   "Sign Up",
@@ -418,7 +420,7 @@ class _MainLoginPageState extends State<MainLoginPage> {
         final User user = (await FirebaseAuth.instance
                 .signInWithEmailAndPassword(email: _email!, password: _pwd!))
             .user!;
-        displayToast();
+        displayToast("Logged in successfully");
         Navigator.pushReplacement(
           context,
           MaterialPageRoute<Map>(
@@ -427,15 +429,42 @@ class _MainLoginPageState extends State<MainLoginPage> {
             },
           ),
         );
-      } catch (e) {
-        Navigator.pushReplacementNamed(context, '/screen8');
+      } on FirebaseAuthException catch (e) {
+        switch (e.code) {
+          case 'invalid-email':
+            {
+              displayToast('Invalid email');
+              break;
+            }
+
+          case 'user-disabled':
+            {
+              displayToast('User is disabled by admin');
+              break;
+            }
+
+          case 'user-not-found':
+            {
+              displayToast('User is not available Please signup');
+              break;
+            }
+
+          case 'wrong-password':
+            {
+              displayToast('Password is Wrong');
+              break;
+            }
+
+          default:
+            displayToast(e.code.toString());
+        }
       }
     }
   }
 
-  displayToast() {
+  displayToast(String message) {
     Fluttertoast.showToast(
-      msg: "Logged in successfully",
+      msg: message,
       toastLength: Toast.LENGTH_LONG,
       gravity: ToastGravity.BOTTOM,
       timeInSecForIosWeb: 1,

@@ -34,7 +34,7 @@ class _HomePageState extends State<HomePage> {
 
   loadModel() async {
     await Tflite.loadModel(
-      model: "assets/Model/float16_model_Inceptionv3_249.tflite",
+      model: "assets/Model/float16_model_Inceptionv3.tflite",
       labels: "assets/Model/ImageLabels.txt",
       numThreads: 4,
       isAsset: true,
@@ -47,7 +47,7 @@ class _HomePageState extends State<HomePage> {
       path: image.path,
       imageMean: 0.0,
       imageStd: 224.0,
-      numResults: 1,
+      numResults: 2,
       threshold: 0.1,
       asynch: true,
     );
