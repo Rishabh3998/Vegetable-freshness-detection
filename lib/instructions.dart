@@ -102,6 +102,18 @@ class _InstructionsState extends State<Instructions> {
                           fontWeight: FontWeight.w500,
                         ),
                       ),
+                      SizedBox(
+                        height: 20.0,
+                      ),
+                      Text(
+                        "Note: You can also use this app without any signup or login.\n\nJust click on Detect button and click images.",
+                        style: TextStyle(
+                          fontFamily: "Comfortaa",
+                          fontSize: 22.0,
+                          color: Colors.black,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
                     ],
                   ),
                 ),
