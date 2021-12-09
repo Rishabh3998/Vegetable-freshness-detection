@@ -94,7 +94,7 @@ class _InstructionsState extends State<Instructions> {
                         height: 20.0,
                       ),
                       Text(
-                        "1) Register using your email id if you haven't already. \n\n2) Login to the app using your registered email id. \n\n3) Click on the start button to get started. \n\n4) Click a clear picture of the vegetable in good light using the camera icon or select an image of the vegetable from your gallery using the file icon to check the quality of the vegetable.",
+                        "1) Register using your email id if you haven't already. \n\n2) Login to the app using your registered email id. \n\n3) Click on the start button to get started. \n\n4) Click a clear picture of the vegetable in proper lighting and select that image from your gallery using the file icon to check the quality of that vegetable.",
                         style: TextStyle(
                           fontFamily: "Comfortaa",
                           fontSize: 22.0,
@@ -106,7 +106,7 @@ class _InstructionsState extends State<Instructions> {
                         height: 20.0,
                       ),
                       Text(
-                        "Note: You can also use this app without any signup or login.\n\nJust click on Detect button and click images.",
+                        "Note: You can also use this app without any signup or login.\n\nJust click on Let's Start button below and click images.",
                         style: TextStyle(
                           fontFamily: "Comfortaa",
                           fontSize: 22.0,

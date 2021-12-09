@@ -81,7 +81,7 @@ flutter:
   assets:
     - assets/
     # - assets/Model/float16_optimised_model_Inceptionv3.tflite
-    - assets/Model/float16_model_Inceptionv3_new.tflite
+    - assets/Model/float16_optimised_model_Inceptionv3_new.tflite
     - assets/Model/ImageLabels.txt
 
   # An image asset can refer to one or more resolution-specific "variants", see

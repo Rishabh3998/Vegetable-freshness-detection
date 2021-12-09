@@ -1,6 +1,7 @@
 //Main Home Page for classification
 
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:vegetable_app/drawer.dart';
 import 'dart:io';
 import 'package:tflite/tflite.dart';
@@ -34,7 +35,7 @@ class _HomePageState extends State<HomePage> {
 
   loadModel() async {
     await Tflite.loadModel(
-      model: "assets/Model/float16_model_Inceptionv3_new.tflite",
+      model: "assets/Model/float16_optimised_model_Inceptionv3_new.tflite",
       labels: "assets/Model/ImageLabels.txt",
       numThreads: 4,
       isAsset: true,
@@ -144,42 +145,49 @@ class _HomePageState extends State<HomePage> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  ElevatedButton(
-                    child: const Icon(
-                      Icons.add_a_photo,
-                      color: Colors.white,
-                      size: 30,
-                    ),
-                    style: ElevatedButton.styleFrom(
-                      primary: Colors.blue,
-                      minimumSize: const Size(60, 60.0),
-                      side: const BorderSide(width: 1.0, color: Colors.white),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(30.0),
-                      ),
-                      textStyle: const TextStyle(
-                        color: Colors.black,
-                      ),
-                    ),
-                    onPressed: pickImage,
-                  ),
-                  const SizedBox(
-                    width: 80.0,
-                  ),
-                  ElevatedButton(
-                    child: const Icon(
+                  // ElevatedButton(
+                  //   child: const Icon(
+                  //     Icons.add_a_photo,
+                  //     color: Colors.white,
+                  //     size: 30,
+                  //   ),
+                  //   style: ElevatedButton.styleFrom(
+                  //     primary: Colors.blue,
+                  //     minimumSize: const Size(60, 60.0),
+                  //     side: const BorderSide(width: 1.0, color: Colors.white),
+                  //     shape: RoundedRectangleBorder(
+                  //       borderRadius: BorderRadius.circular(30.0),
+                  //     ),
+                  //     textStyle: const TextStyle(
+                  //       color: Colors.black,
+                  //     ),
+                  //   ),
+                  //   onPressed: pickImage,
+                  // ),
+                  // const SizedBox(
+                  //   width: 80.0,
+                  // ),
+                  ElevatedButton.icon(
+                    icon: const Icon(
                       Icons.folder,
                       color: Colors.white,
                       size: 30,
                     ),
+                    label: const Text(
+                      "Choose image",
+                    ),
                     style: ElevatedButton.styleFrom(
                       primary: Colors.blue,
-                      minimumSize: const Size(60, 60.0),
-                      side: const BorderSide(width: 1.0, color: Colors.white),
+                      minimumSize: const Size(250, 60.0),
+                      side: const BorderSide(width: 2.0, color: Colors.white),
                       shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(30.0),
+                        borderRadius: BorderRadius.circular(10.0),
                       ),
                       textStyle: const TextStyle(
+                        fontSize: 17.0,
+                        fontFamily: "Comfortaa",
+                        fontStyle: FontStyle.normal,
+                        fontWeight: FontWeight.bold,
                         color: Colors.black,
                       ),
                     ),

@@ -101,24 +101,32 @@ class _MyDrawerState extends State<MyDrawer> {
               title: const Text('Log In'),
               leading: const Icon(Icons.login_rounded),
               onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => MainLoginPage(),
-                  ),
-                );
+                if (user == null) {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => MainLoginPage(),
+                    ),
+                  );
+                } else {
+                  displayToast('You are already logged in');
+                }
               },
             ),
             ListTile(
               title: const Text('Sign Up'),
               leading: const Icon(Icons.app_registration),
               onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const SignUpPage(),
-                  ),
-                );
+                if (user == null) {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const SignUpPage(),
+                    ),
+                  );
+                } else {
+                  displayToast('You are already signed in');
+                }
               },
             ),
             // ListTile(
@@ -159,11 +167,13 @@ class _MyDrawerState extends State<MyDrawer> {
             //     // ...
             //   },
             // ),
-            ListTile(
-              title: const Text('Log Out'),
-              leading: const Icon(Icons.logout_rounded),
-              onTap: logout,
-            ),
+            user != null
+                ? ListTile(
+                    title: const Text('Log Out'),
+                    leading: const Icon(Icons.logout_rounded),
+                    onTap: logout,
+                  )
+                : ListTile(),
           ],
         ),
       ),
